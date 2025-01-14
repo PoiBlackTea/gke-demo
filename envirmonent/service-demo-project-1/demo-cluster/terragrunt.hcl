@@ -20,7 +20,7 @@ locals {
 }
 
 include "root" {
-  path = find_in_parent_folders("terragrunt.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 
@@ -28,7 +28,7 @@ inputs = merge(
   ## load external terraform inputs
   local.node_pool_settings.inputs,
   local.master_authorized_network.inputs,
-  local.node_pool_settings_dynamics.inputs,
+  # local.node_pool_settings_dynamics.inputs,
   {
 
   ## Common project setting
@@ -36,19 +36,19 @@ inputs = merge(
   region     = "us-central1"
 
   ## GKE cluster setting
-  release_channel                      = ""
-  kubernetes_version                   = ""
-  cluster_name_suffix                  = ""
+  release_channel                      = "REGULAR"
+  kubernetes_version                   = "1.30.6-gke.1596000"
+  name                                 = "demo-cluster"
   zones                                = ["us-central1-c"]
-  network                              = ""
+  network                              = "devops-vpc"
   ## If use cross project shared vpc need specify network project id
-  network_project_id                   = "<PROJECT_ID>"
-  subnetwork                           = ""
-  subnetwork_region                    = ""
-  ip_range_pods                        = ""
-  ip_range_services                    = ""
+  network_project_id                   = "devops-center-447814"
+  subnetwork                           = "devops-us-central1-subnet"
+  subnetwork_region                    = "us-central1"
+  ip_range_pods                        = "devops-us-central1-subnet-gke-pods"
+  ip_range_services                    = "devops-us-central1-subnet-gke-services"
   master_ipv4_cidr_block               = "172.16.0.144/28"
-  enable_private_endpoint              = true
+  enable_private_endpoint              = false
   enable_private_nodes                 = true
   deletion_protection                  = false
   service_external_ips                 = false
@@ -57,7 +57,7 @@ inputs = merge(
   ## grant service registry access
   grant_registry_access                = true
   ## When grant_registry_access is true, registry_project_ids must be set, the storage viewer and artifectregisitry.reader role will be associated to service account in specific project
-  registry_project_ids                 = ["<PROJECT_ID>", local.project_id]
+  registry_project_ids                 = ["devops-center-447814", local.project_id]
 
   ## Optional Setting 
   gateway_api_channel                  = "CHANNEL_STANDARD"

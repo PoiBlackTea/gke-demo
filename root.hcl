@@ -5,9 +5,9 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    project  = "<PROJECT_ID>"
+    project  = "devops-center-447814"
     location = "us-central1"
-    bucket   = "<PROJECT_ID>-terragrunt-bucket-tfstate"
+    bucket   = "devops-center-447814-terragrunt-bucket-tfstate"
     ## Change the prefix to match the folder structure of your project.
     prefix   = "gke/${path_relative_to_include()}"
   }
