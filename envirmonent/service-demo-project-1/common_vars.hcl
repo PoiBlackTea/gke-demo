@@ -1,3 +1,0 @@
-inputs = {
-    # setup common variables 
-}
