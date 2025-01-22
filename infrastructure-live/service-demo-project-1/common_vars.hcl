@@ -1,0 +1,3 @@
+inputs = {
+    # setup common variables 
+}
